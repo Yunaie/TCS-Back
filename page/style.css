@@ -1,0 +1,30 @@
+body
+{
+    background-image:url(./fond/bg1.jpg);
+    background-attachment: fixed;
+    background-size : cover;
+    padding: 25px;
+}
+
+p
+{
+    color: black;
+    font-family:Georgia, 'Times New Roman', Times, serif; 
+    margin: auto;
+    font-variant: small-caps;
+    font-weight:bolder;
+}
+  
+
+  .modal-content {
+    background-color: rgba(250, 250, 250, 0.5);
+    padding: 30px;
+    border-radius: 5px;
+    width: 80%;
+    height: 1000px; /* Utilise une largeur en pourcentage pour que la boîte modale soit responsive */
+    max-width: 800px; /* Utilise une largeur maximale pour éviter que la boîte modale ne devienne trop grande */
+    margin: auto; /* Centre la boîte modale horizontalement */
+    position: relative;
+
+  }
+  

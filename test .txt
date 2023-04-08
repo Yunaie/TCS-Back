@@ -1,0 +1,18 @@
+test : 
+
+user
+
+{
+	"name" : "sirine", 
+	"age" : 20, 
+	"genre" : "is a girl"
+}
+
+article 
+
+{
+	"title" : "hello",
+	"description" : "my name is",
+	"createdbywho" : "sirine"
+
+}
