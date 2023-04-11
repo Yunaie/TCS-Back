@@ -4,15 +4,47 @@ user
 
 {
 	"name" : "sirine", 
-	"age" : 20, 
-	"genre" : "is a girl"
+	"email" : "sirine@test.com", 
+	"date_of_birth" : "26/11/02"
 }
 
 article 
 
 {
-	"title" : "hello",
-	"description" : "my name is",
-	"createdbywho" : "sirine"
+	"title" : "10 reasons why i love him",
+	"description" : "just me talking about my sweet bf",
+	"markdown" : "i loev him sm , i will cherish him with all my heart. Hes so freaking cute ilh"
 
 }
+
+histoire
+
+{
+    "pays": "France",
+    "niveau_gore": 7,
+    "date": "06-04-2022",
+    "type": "meurtre"
+}
+
+criminel
+
+{
+  "name": "John Doe",
+  "nationalite": "Américaine",
+  "date_of_birth": "20-01-1985",
+  "peine_de_prison": 10
+}
+
+victime
+
+{
+  "name": "Alice Dupont",
+  "nationalite": "Française",
+  "date_of_birth": "12-05-1990"
+}
+
+
+
+
+
+

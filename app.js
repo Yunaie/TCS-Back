@@ -6,10 +6,13 @@ var cors = require("cors");
 require("dotenv").config();
 app.use(bodyparser.json());
 app.use(express.json());
+
 const usersRouter = require('./routes/users')
 const articleRouter = require('./routes/article')
+const histoireRouter = require('./routes/histoire')
+const criminelRouter = require('./routes/criminel')
+const victimeRouter = require('./routes/victime')
 
-cacabouda
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,5 +38,9 @@ app.get("/", (req, res) => {
 });
 app.use('/users', usersRouter);
 app.use('/articles',articleRouter);
+app.use('/histoires',histoireRouter);
+app.use('/criminels',criminelRouter);
+app.use('/victimes',victimeRouter);
+
 
 app.listen(process.env.PORT || 8000);

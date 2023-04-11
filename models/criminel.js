@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const usersSchema = new mongoose.Schema({
+const criminelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
-  email: {
+  nationalite: {
     type: String,
     required: true
   },
@@ -14,10 +14,10 @@ const usersSchema = new mongoose.Schema({
     required: true,
     match: /^\d{1,2}-\d{1,2}-\d{2,4}$/ // permet d'accepter le format jj-mm-aaaa, jj-m-aaaa, j-m-aa, etc.
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  peine_de_prison: {
+    type : Number,
+    required : true
   }
 });
 
-module.exports = mongoose.model('users', usersSchema);
+module.exports = mongoose.model('criminel', criminelSchema);
