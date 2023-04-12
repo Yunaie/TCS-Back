@@ -15,12 +15,14 @@
              <form action="swipe.html" method="POST">
         <div>
             <label for="username">Username</label>
-            <input type="text" name="username" placeholder="username">
+            <input type="text" autocomplete="off" name="text" class="input" placeholder="Username">
             <span></span>
+
+            
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="password" name="password" placeholder="password"
+            <input type="text" autocomplete="off" name="text" class="input" placeholder="password">
             <span></span>
         </div>
         <button id="log in">Log in</button>
@@ -30,7 +32,7 @@
             </div>
 
             <div class="image">
-                <img src="../fond/bg2.gif" alt="Mon image" id="image-menu">
+                <img src="../fond/bg3.gif" alt="Mon image" id="image-menu">
                 <ul class="menu">
                     <li><a href="../acceuil/index.html">Acceuil</a></li>
                     <li><a href="connection.html">Connection</a></li>
@@ -44,7 +46,6 @@
 
     
 <script>
-    
     var imageMenu = document.getElementById("image-menu");
     var menu = document.querySelector(".menu");
 
@@ -61,8 +62,4 @@
             menu.style.display = "none";
         }
     });
-
-
-
-
 </script>

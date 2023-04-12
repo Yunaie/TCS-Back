@@ -57,7 +57,7 @@ p {
   position: absolute;
   bottom: 100%;
   left: 0;
-  background-color: #fff;
+  background-color: rgba(250, 250, 250, 0.7);
   border: 1px solid #ccc;
   padding: 0;
   margin: 0;
@@ -70,7 +70,7 @@ p {
 }
 
 .menu li:hover {
-  background-color: #f2f2f2;
+  background-color: rgba(250, 250, 250, 0.7);
 }
 
 .image {
@@ -78,7 +78,23 @@ p {
   top: 85%;
   left: 93%;
   transform: translate(-50%, -50%);
-
   z-index: 9999;
-  /* pour mettre l'image au-dessus des autres éléments */
+}
+
+.input {
+  border: none;
+  outline: none;
+  margin: 3px;
+  border-radius: 15px;
+  padding: 1em;
+  background-color: rgba(250, 250, 250, 0.7);
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
+}
+
+.input:focus {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+             -13px -13px 100px #ffffff;
 }
