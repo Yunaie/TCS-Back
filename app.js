@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
+const cookieParser = require("cookie-parser");
 var cors = require("cors");
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(bodyparser.json());
+app.use(cookieParser());
 app.use(express.json());
 
 const usersRouter = require('./routes/users')
@@ -12,7 +15,7 @@ const articleRouter = require('./routes/article')
 const histoireRouter = require('./routes/histoire')
 const criminelRouter = require('./routes/criminel')
 const victimeRouter = require('./routes/victime')
-
+const authRouter = require('./routes/auth');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -41,6 +44,7 @@ app.use('/articles',articleRouter);
 app.use('/histoires',histoireRouter);
 app.use('/criminels',criminelRouter);
 app.use('/victimes',victimeRouter);
+app.use("/auth", authRouter);
 
 
 app.listen(process.env.PORT || 8000);
