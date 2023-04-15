@@ -1,54 +1,43 @@
-const User = require("../models/users.js");
-const bcrypt = require("bcryptjs");
-const { createError } = require("../utils/error.js");
-const jwt = require("jsonwebtoken");
+const UserModel = require('../models/users');
+const jwt = require('jsonwebtoken');
+const { signUpErrors, signInErrors } = require('../utils/error');
 
-const authController = {
-  register: async (req, res, next) => {
-    try {
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(req.body.password, salt);
+const maxAge = 3 * 24 * 60 * 60 * 1000;
 
-      const newUser = new User({
-        ...req.body,
-        password: hash,
-      });
+const createToken = (id) => {
+  return jwt.sign({id}, process.env.TOKEN_SECRET, {
+    expiresIn: maxAge
+  })
+};
 
-      await newUser.save();
-      res.status(200).send("User has been created.");
-    } catch (err) {
-      next(err);
-    }
-  },
+module.exports.signUp = async (req, res) => {
+  const {pseudo, email, password} = req.body
 
-  login: async (req, res, next) => {
-    try {
-      const user = await User.findOne({ username: req.body.username });
-      if (!user) return next(createError(404, "User not found!"));
-
-      const isPasswordCorrect = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
-      if (!isPasswordCorrect)
-        return next(createError(400, "Wrong password or username!"));
-
-      const token = jwt.sign(
-        { id: user._id, isAdmin: user.isAdmin },
-        process.env.JWT
-      );
-
-      const { password, isAdmin, ...otherDetails } = user._doc;
-      res
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
-        .status(200)
-        res.status(200).send("You are logged in.");
-    } catch (err) {
-      next(err);
-    }
-  },
+  try {
+    const user = await UserModel.create({pseudo, email, password });
+    res.status(201).json({ user: user._id});
+  }
+  catch(err) {
+    const errors = signUpErrors(err);
+    res.status(200).send({ errors })
+  }
 }
 
-module.exports = authController;
+module.exports.signIn = async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    const user = await UserModel.login(email, password);
+    const token = createToken(user._id);
+    res.cookie('jwt', token, { httpOnly: true, maxAge});
+    res.status(200).json({ user: user._id})
+  } catch (err){
+    const errors = signInErrors(err);
+    res.status(200).json({ errors });
+  }
+}
+
+module.exports.logout = (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.redirect('/');
+}

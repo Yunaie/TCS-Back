@@ -1,45 +1,65 @@
-const User = require("../models/users.js");
+const UserModel = require("../models/users");
+const ObjectID = require("mongoose").Types.ObjectId;
 
-const userController = {
-  updateUser: async (req, res, next) => {
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        { $set: req.body },
-        { new: true }
-      );
-      res.status(200).json(updatedUser);
-    } catch (err) {
-      next(err);
-    }
-  },
 
-  deleteUser: async (req, res, next) => {
-    try {
-      await User.findByIdAndDelete(req.params.id);
-      res.status(200).json("User has been deleted.");
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  getUser: async (req, res, next) => {
-    try {
-      const user = await User.findById(req.params.id);
-      res.status(200).json(user);
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  getUsers: async (req, res, next) => {
-    try {
-      const users = await User.find();
-      res.status(200).json(users);
-    } catch (err) {
-      next(err);
-    }
+module.exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find().select("-password");
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
 
-module.exports = userController;
+module.exports.userInfo = (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  UserModel.findById(req.params.id)
+    .select("-password")
+    .then((docs) => {
+      if (docs) res.send(docs);
+      else res.status(404).send("ID unknown : " + req.params.id);
+    })
+    .catch((err) => {
+      console.log("Error while getting the user details:", err);
+      res.status(500).json(err);
+    });
+};
+
+
+module.exports.updateUser = async (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  try {
+    await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          bio: req.body.bio,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        if (err) return res.status(500).send({ message: err });
+      }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+};
+
+module.exports.deleteUser = async (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  try {
+    await UserModel.deleteOne({ _id: req.params.id }).exec();
+    res.status(200).json({ message: "Successfully deleted." });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+};
+

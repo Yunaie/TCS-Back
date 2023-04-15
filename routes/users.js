@@ -1,43 +1,16 @@
-const express = require("express");
-const {
-  verifyAdmin,
-  verifyUser,
-} = require("../utils/verifyToken.js");
-const {
-  updateUser,
-  deleteUser,
-  getUser,
-  getUsers,
-} = require("../controllers/user.js");
+const router = require('express').Router();
+const authController = require('../controllers/auth');
+const userController = require('../controllers/user');
 
-const router = express.Router();
+// auth
+router.post("/register", authController.signUp);
+router.post('/login', authController.signIn);
+router.get('/logout', authController.logout);
 
-// Routes
-router.put("/:id", verifyUser, updateUser);
-
-//DELETE
-router.delete("/:id", verifyUser, deleteUser);
-
-//GET
-router.get("/:id", verifyUser, getUser);
-
-//GET ALL
-router.get("/", verifyAdmin, getUsers);
-/*
-router.get("/checkauthentication", verifyToken, (req, res, next) => {
-  res.send("hello user, you are logged in");
-});
-
-router.get("/checkuser/:id", verifyUser, (req, res, next) => {
-  res.send(
-    "hello user, you are logged in and you can delete your account"
-  );
-});
-
-router.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
-  res.send(
-    "hello admin, you are logged in and you can delete all accounts"
-  );
-});*/
+// user display: 'block',
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.userInfo);
+router.put("/:id", userController.updateUser);
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
