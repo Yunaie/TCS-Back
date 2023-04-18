@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const criminelSchema = new mongoose.Schema({
   name: {
@@ -17,7 +18,11 @@ const criminelSchema = new mongoose.Schema({
   peine_de_prison: {
     type : Number,
     required : true
-  }
+  },
+  victime : [{
+    type : Schema.Types.ObjectId,
+    ref : 'victime'
+  }]
 });
 
 module.exports = mongoose.model('criminel', criminelSchema);

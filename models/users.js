@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
   {
@@ -33,7 +34,12 @@ const userSchema = new mongoose.Schema(
     bio :{
       type: String,
       max: 1024,
-    }
+    },
+    likes :[{
+    type : Schema.Types.ObjectId,
+    ref : 'articles'
+  }],
+  
   },
   {
     timestamps: true,

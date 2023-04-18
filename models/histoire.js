@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
 const histoireSchema = new mongoose.Schema({
     pays: {
@@ -17,7 +18,16 @@ const histoireSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true
-    }
+    },
+    criminel : [{
+        type : Schema.Types.ObjectId,
+        ref : 'criminel'
+      }],
+      victime : [{
+        type : Schema.Types.ObjectId,
+        ref : 'victime'
+      }]
+
 })
 
 module.exports = mongoose.model('histoire', histoireSchema)

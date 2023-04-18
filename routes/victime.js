@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const removedVictime = await victime.findByIdAndRemove({ _id: req.params.id });
-    res.send(removedVictime);
+    res.status(201).json({ message: "Victim successfully deleted." });
   } catch (error) {
     return res.status(404).send(error);
   }

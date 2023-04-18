@@ -1,26 +1,18 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const articleSchema = new mongoose.Schema({
-  title: {
+const commentaireSchema = new mongoose.Schema({
+  commentaire: {
     type: String,
     required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  markdown : {
-    type : String,
-    required : true
   },
   createdAt: {
     type: Date,
     default: Date.now
   },
-  histoire : {
+  article : {
     type : Schema.Types.ObjectId,
-    ref : 'histoire'
+    ref : 'article'
   }
 })
 
