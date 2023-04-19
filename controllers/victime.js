@@ -21,14 +21,17 @@ async function getVictim(req, res) {
 }
 
 async function deleteVictim(req,res) {
- 
     try {
-        const removedVictim = await victim.findByIdAndRemove({ _id: req.params.id });
-        res.status(201).json({ message: "victim successfully deleted." });
-      } catch (error) {
+        const removedVictim = await victime.findByIdAndRemove(req.params.id);
+        if (removedVictim) {
+            res.status(200).json({ message: "Victim successfully deleted." });
+        } else {
+            res.status(404).json({ message: "Victim not found." });
+        }
+    } catch (error) {
         console.log(error);
-        return res.status(404).send(error);
-      }
+        return res.status(500).send(error);
+    }
 }
 
 

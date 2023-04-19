@@ -7,6 +7,6 @@ const { createArticle, getArticles,deleteArticles } = require('../controllers/ar
 
 router.post('/', createArticle);
 router.get('/', getArticles);
-router.delete('/',deleteArticles);
+router.delete('/:id',deleteArticles);
 
 module.exports = router;

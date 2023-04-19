@@ -1,3 +1,4 @@
+const crime = require('../models/crime');
 const Crime = require('../models/crime');
 const ObjectID = require("mongoose").Types.ObjectId;
 
@@ -42,20 +43,22 @@ async function getCrimes(req, res) {
   }
 }
 
-async function deleteCrime(req, res) {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
+async function deleteCrimes(req,res) {
   try {
-    await Crime.deleteOne({ _id: req.params.id }).exec();
-    res.status(200).json({ message: "Successfully deleted." });
-  } catch (err) {
-    return res.status(500).json({ message: err });
+      const removedCrime = await crime.findByIdAndRemove(req.params.id);
+      if (removedCrime) {
+          res.status(200).json({ message: "Crime successfully deleted." });
+      } else {
+          res.status(404).json({ message: "Crime not found." });
+      }
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
   }
 }
 
 module.exports = {
   createCrime,
   getCrimes,
-  deleteCrime
+  deleteCrimes
 };

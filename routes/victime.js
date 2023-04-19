@@ -7,6 +7,6 @@ const { createVictim, getVictim,deleteVictim } = require('../controllers/victime
 
 router.post('/', createVictim);
 router.get('/', getVictim);
-router.delete('/',deleteVictim);
+router.delete('/:id',deleteVictim);
 
 module.exports = router;

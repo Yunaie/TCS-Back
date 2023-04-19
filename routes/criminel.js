@@ -7,6 +7,6 @@ const { createCriminel, getCriminals,deleteCriminals } = require('../controllers
 
 router.post('/', createCriminel);
 router.get('/', getCriminals);
-router.delete('/',deleteCriminals);
+router.delete('/:id',deleteCriminals);
 
 module.exports = router;
