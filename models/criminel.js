@@ -21,4 +21,4 @@ const criminelSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('criminel', criminelSchema);
+module.exports = mongoose.model('Criminel', criminelSchema);

@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const crime = require('../models/article');
+const article = require('../models/article');
 
 const router = express.Router();
-const { createArticle, getArticles,deleteArticles } = require('../controllers/article');
+const { createArticle, getArticles,deleteArticle } = require('../controllers/article');
 
 router.post('/', createArticle);
 router.get('/', getArticles);
-router.delete('/:id',deleteArticles);
+router.delete('/:id',deleteArticle);
 
 module.exports = router;

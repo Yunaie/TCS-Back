@@ -17,4 +17,4 @@ const victimeSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('victime', victimeSchema);
+module.exports = mongoose.model('Victime', victimeSchema);

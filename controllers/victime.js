@@ -1,28 +1,28 @@
-const victime = require('../models/victime');
+const Victim = require('../models/victime');
 
 async function createVictim(req, res) {
     try {
-        const allVictim = await victime.find();
-        res.json(allVictim);
-      } catch (error) {
-        console.log(error);
-        res.status(500).send({ error: 'An error occurred while getting the victim.' });
-      }
-}
-
-async function getVictim(req, res) {
-   try {
-      const allVictim = await victime.find();
-      res.json(allVictim);
+        const newVictim = await Victim.create(req.body);
+        res.json(newVictim);
     } catch (error) {
-      console.log(error);
-      res.status(500).send({ error: 'An error occurred while getting the victims.' });
+        console.log(error);
+        res.status(500).send({ error: 'An error occurred while creating the victim.' });
     }
 }
 
-async function deleteVictim(req,res) {
+async function getVictim(req, res) {
     try {
-        const removedVictim = await victime.findByIdAndRemove(req.params.id);
+        const allVictim = await Victim.find();
+        res.json(allVictim);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ error: 'An error occurred while getting the victims.' });
+    }
+}
+
+async function deleteVictim(req, res) {
+    try {
+        const removedVictim = await Victim.findByIdAndRemove(req.params.id);
         if (removedVictim) {
             res.status(200).json({ message: "Victim successfully deleted." });
         } else {
@@ -34,9 +34,8 @@ async function deleteVictim(req,res) {
     }
 }
 
-
 module.exports = {
-  createVictim,
-  getVictim,
-  deleteVictim
+    createVictim,
+    getVictim,
+    deleteVictim
 };

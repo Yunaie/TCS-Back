@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const crimeSchema = new mongoose.Schema({
   pays: {
     type: String,
@@ -19,12 +18,14 @@ const crimeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  criminel: {
-    type: [String],
-  },
-  victime: {
-    type: [String]
-  }
+  criminel: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Criminel'
+  }],
+  victime: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Victime'
+  }]
 });
 
 module.exports = mongoose.model('Crime', crimeSchema);

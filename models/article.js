@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
 
 const articleSchema = new mongoose.Schema({
-  title: {
+  titre: {
     type: String,
     required: true
   },
@@ -18,10 +17,10 @@ const articleSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  histoire : {
-    type : Schema.Types.ObjectId,
-    ref : 'histoire'
+  crime: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Crime'
   }
 })
 
-module.exports = mongoose.model('article', articleSchema)
+module.exports = mongoose.model('Article', articleSchema)

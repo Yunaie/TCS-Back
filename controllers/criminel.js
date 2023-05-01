@@ -2,12 +2,12 @@ const criminel = require('../models/criminel');
 
 async function createCriminel(req, res) {
     try {
-        const allCriminel = await criminel.find();
-        res.json(allCriminel);
-      } catch (error) {
+        const newCriminel = await criminel.create(req.body);
+        res.json(newCriminel);
+    } catch (error) {
         console.log(error);
-        res.status(500).send({ error: 'An error occurred while getting the criminals.' });
-      }
+        res.status(500).send({ error: 'An error occurred while creating the criminal.' });
+    }
 }
 
 async function getCriminals(req, res) {
@@ -33,8 +33,6 @@ async function deleteCriminals(req,res) {
         return res.status(500).send(error);
     }
 }
-
-
 
 module.exports = {
   createCriminel,
