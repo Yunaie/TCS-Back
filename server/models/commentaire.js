@@ -12,8 +12,8 @@ const commentaireSchema = new mongoose.Schema({
   },
   article : {
     type : Schema.Types.ObjectId,
-    ref : 'article'
+    ref : 'Article'
   }
 })
 
-module.exports = mongoose.model('article', articleSchema)
+module.exports = mongoose.model('Commentaire', articleSchema)
