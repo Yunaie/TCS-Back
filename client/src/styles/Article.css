@@ -1,0 +1,28 @@
+.article {
+    color: rgba(255, 255, 255, 0.708);
+    margin: 10px;
+    width: 90%; /* Ajustez la largeur selon vos besoins */  
+    max-width:302px ;
+}
+
+
+h2 {
+    font-size: 25px;
+    font-family:'Crimson Text';
+    font-weight: 600;  
+    font-variant-caps: all-petite-caps;
+    margin-top: 10px;
+}
+
+h4 {
+    font-size: 17px;
+    font-family: 'GFS Neohellenic', sans-serif;
+    font-variant-caps:unicase;
+    margin-top: 5px;
+}
+
+a:hover {
+    cursor : pointer;
+    color : rgba(175, 2, 2, 0.806);
+    transition: color 0.2s;
+}
