@@ -1,4 +1,4 @@
-  .latest {
+.latest {
     color: rgb(255, 255, 255,0.8);
     font-family:'Special Elite';
     font-size: 25px;
@@ -8,7 +8,7 @@
     margin-bottom: 30px;
   }
 
-  .index .container {
+  .articlesPages .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
@@ -16,19 +16,19 @@
     margin-right: 30px;
 }
 
-.index .article {
+.articlesPages .article {
   color: rgba(255, 255, 255, 0.708);
   margin: 10px;
   width: 90%; /* Ajustez la largeur selon vos besoins */  
   max-width:302px ;
 }
 
-.index p {
+.articlesPages p {
   display : none;
 }
 
 
-.index h2 {
+.articlesPages h2 {
   font-size: 25px;
   font-family:'Crimson Text';
   font-weight: 600;  
@@ -36,14 +36,14 @@
   margin-top: 10px;
 }
 
-.index h4 {
+.articlesPages h4 {
   font-size: 17px;
   font-family: 'GFS Neohellenic', sans-serif;
   font-variant-caps:unicase;
   margin-top: 5px;
 }
 
-.index a:hover {
+.articlesPages a:hover {
   cursor : pointer;
   color : rgba(175, 2, 2, 0.806);
   transition: color 0.2s;

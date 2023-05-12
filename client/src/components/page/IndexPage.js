@@ -3,8 +3,8 @@ import '../../styles/IndexPage.css'
 
 function IndexPage() {
     return (
-        <div>
-            <h3 className='latest'>Latest on the blog :</h3>                  
+        <div className="index" >
+            <h3 className="latest">Latest on the blog :</h3>                  
             <div className="container">
                 <Article />
                 <Article />

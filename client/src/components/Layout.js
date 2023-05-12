@@ -9,15 +9,15 @@ function Layout() {
     const title_header = "True Crime Story"
     return(
         <div>
-            <div className="content">
+            <div className="header">
                 <div class="main-title">
                     <h1>{title_header}</h1>
                 </div>
                 <ul className="side-bar">
                     <li><Link to="/">Accueil</Link></li>
                     <li><Link to="/login">Connexion</Link></li>
-                    <li><Link to="#">Articles</Link></li>
-                    <li><Link to="#">Infos</Link></li>
+                    <li><Link to="/articles">Articles</Link></li>
+                    <li><Link to="/infos">Infos</Link></li>
                 </ul>
             </div>
             <div className="body">
