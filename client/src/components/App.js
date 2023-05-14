@@ -6,6 +6,7 @@ import RegisterPage from "./page/RegisterPage"
 import ArticlesPage from "./page/ArticlesPage"
 import ArticlePage from "./page/ArticlePage"
 import InfoPage from "./page/InfoPage"
+import ProfilePage from "./page/ProfilePage";
 import "../styles/Reset.css"
 import IndexPage from "./page/IndexPage"
 import Layout from "./Layout";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/articles" element={<ArticlesPage/>} />
             <Route path="/article" element={<ArticlePage/>} />
             <Route path="/infos" element={<InfoPage/>} />
+            <Route path="/profile" element={<ProfilePage/>} />
           </Route>  
         </Routes>
       </Router>

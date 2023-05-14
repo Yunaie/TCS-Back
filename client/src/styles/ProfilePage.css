@@ -1,0 +1,40 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.808);
+    width:80%
+  }
+  
+  .profile h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-family:'Special Elite';
+  }
+  
+  .profile-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .profile-container {
+    font-size: 15px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+
+  .date {
+    margin-top: 15px;
+    display: flex;
+    margin: 10px;
+  }
+  

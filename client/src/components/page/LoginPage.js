@@ -5,7 +5,6 @@ import "../../styles/LoginPage.css"
 import {Link} from "react-router-dom"
 
 function LoginPage() {
-    const [username,setUsername] = useState('')
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [redirect,setRedirect] = useState(false)
@@ -13,11 +12,10 @@ function LoginPage() {
   
     async function login(ev) {
       ev.preventDefault();
-      const response = await fetch('http://localhost:3000/users/login', {
+      const response = await fetch('http://localhost:8000/users/login', {
         method: 'POST',
-        body: JSON.stringify({username,email,password}),
+        body: JSON.stringify({email,password}),
         headers: {'Content-Type':'application/json'},
-        credentials: 'include',
       });
       if (response.ok) {
         response.json().then(userInfo => {
@@ -25,20 +23,20 @@ function LoginPage() {
           setRedirect(true);
         });
       } else {
-        alert('wrong credentials');
+        alert('ca marche pas');
       }
     }
   
     if (redirect) {
-      return <Navigate to={'/login'} />
+      return <Navigate to={'/profile'} />
     }
     return (
       <form onSubmit={login}>
           <h1 className="login-title">Login</h1>
-          <input type="text"
-                placeholder="username"
-                value={username}
-                onChange={ev => setUsername(ev.target.value)}/>
+          <input type="email"
+                placeholder="email"
+                value={email}
+                onChange={ev => setEmail(ev.target.value)}/>
           <input type="password"
                 placeholder="password"
                 value={password}

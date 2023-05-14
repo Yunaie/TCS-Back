@@ -1,54 +1,70 @@
-import {useContext, useState} from "react"
-import {Navigate} from "react-router-dom"
-import {UserContext} from "../UserContext"
-import "../../styles/LoginPage.css"
+import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
+import "../../styles/LoginPage.css";
 
 function RegisterPage() {
-    const [username,setUsername] = useState('')
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const [redirect,setRedirect] = useState(false)
-    const {setUserInfo} = useContext(UserContext)
-  
-    async function register(ev) {
-      ev.preventDefault();
-      const response = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        body: JSON.stringify({username,email,password}),
-        headers: {'Content-Type':'application/json'},
-        credentials: 'include',
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const { setUserInfo } = useContext(UserContext);
+
+  async function register(ev) {
+    ev.preventDefault();
+    console.log("hello")
+    try {
+      const response = await fetch("http://localhost:8000/users/register", {
+        method: "POST",
+        body: JSON.stringify({ username, email, password }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
+
       if (response.ok) {
-        response.json().then(userInfo => {
-          setUserInfo(userInfo);
-          setRedirect(true);
-        });
+        const data = await response.json();
+        setUserInfo(data.user);
+        setRedirect(true);
       } else {
-        alert('wrong credentials');
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred during registration: " + error.message);
     }
-  
-    if (redirect) {
-      return <Navigate to={'/'} />
-    }
-    return (
-      <form onSubmit={register}>
-        <h1 className="login-title">Register</h1>
-        <input type="text"
-               placeholder="username"
-               value={username}
-               onChange={ev => setUsername(ev.target.value)}/>
-          <input type="email"
-              placeholder="email"
-              value={email}
-              onChange={ev => setEmail(ev.target.value)}/>
-        <input type="password"
-               placeholder="password"
-               value={password}
-               onChange={ev => setPassword(ev.target.value)}/>
-              <button className="my-button">Register</button>
-      </form>
-    );
+  }
+
+  if (redirect) {
+    return <Navigate to="/profile" />;
+  }
+
+  return (
+    <form onSubmit={register}>
+      <h1 className="login-title">Register</h1>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(ev) => setUsername(ev.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(ev) => setEmail(ev.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(ev) => setPassword(ev.target.value)}
+      />
+      <button className="my-button" type="submit">
+        Register
+      </button>
+    </form>
+  );
 }
 
-export default RegisterPage
+export default RegisterPage;
