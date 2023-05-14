@@ -1,61 +1,39 @@
 .container2 {
-    padding: 30px;
-    border-radius: 5px;
-    /* Utilise une largeur en pourcentage pour que la boîte modale soit responsive */
-    max-width:650px;
-    /* Utilise une largeur maximale pour éviter que la boîte modale ne devienne trop grande */
-    margin: auto;
-    /* Centre la boîte modale horizontalement */
-    position: relative;
-  
-    /* Ajoutez cette propriété pour utiliser Flexbox */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.container2 .article {
+  padding: 30px;
+  border-radius: 5px;
+  max-width: 650px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   color: rgba(255, 255, 255, 0.708);
   margin: 10px;
-  width: 90%; /* Ajustez la largeur selon vos besoins */    
+  width: 90%;
+  margin: 10px;
 }
 
-.container2 img {
-  width: 600px; /* Nouvelle largeur */
-  height: auto; /* Hauteur automatiquement ajustée pour préserver les proportions */
+.container2 .article-img {
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
 }
 
-.container2 h2 {
+.container2 .article-title {
   font-size: 35px;
-  font-family:'Special Elite';
-  font-weight: 600;  
+  font-family: 'Special Elite';
+  font-weight: 600;
   margin-top: 10px;
   text-align: center;
 }
 
-.container2 h4 {
-  font-size: 15px;
-  font-family: 'GFS Neohellenic', sans-serif;
-  font-variant-caps: unicase;
-  margin-top: 5px;
-  display : none;
+.container2 .article-description {
+  display: none;
 }
 
-.container2 a:hover {
-  cursor: pointer;
-  color: rgba(175, 2, 2, 0.806);
-  transition: color 0.2s;
-}
-
-.article {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.text {
+.container2 .markdown {
   margin-top: 25px;
   font-size: 17px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: justify;
 }

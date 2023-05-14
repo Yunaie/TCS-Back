@@ -20,6 +20,10 @@ const articleSchema = new mongoose.Schema({
   crime: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Crime'
+  },
+  picture: {
+    type:String,
+    default : "../image-article/bianca.jpg"
   }
 })
 

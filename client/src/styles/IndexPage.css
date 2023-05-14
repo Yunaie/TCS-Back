@@ -1,4 +1,4 @@
-  .latest {
+  .index .latest {
     color: rgb(255, 255, 255,0.8);
     font-family:'Special Elite';
     font-size: 25px;
@@ -23,12 +23,12 @@
   max-width:302px ;
 }
 
-.index p {
+.index .markdown {
   display : none;
 }
 
 
-.index h2 {
+.index .title {
   font-size: 25px;
   font-family:'Crimson Text';
   font-weight: 600;  
@@ -36,8 +36,8 @@
   margin-top: 10px;
 }
 
-.index h4 {
-  font-size: 17px;
+.index .description {
+  font-size: 18px;
   font-family: 'GFS Neohellenic', sans-serif;
   font-variant-caps:unicase;
   margin-top: 5px;
@@ -47,4 +47,8 @@
   cursor : pointer;
   color : rgba(175, 2, 2, 0.806);
   transition: color 0.2s;
+}
+
+.article-image {
+  border-radius: 10px;
 }
