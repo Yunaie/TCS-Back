@@ -26,19 +26,19 @@ module.exports.signUp = async (req, res) => {
 }
 
 module.exports.signIn = async (req, res) => {
-  const { email, password } = req.body
+  const { email, password } = req.body;
 
   try {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge});
-    res.status(201).json({ message: "Successfully logged in." });
-  } catch (err){
+    res.cookie('jwt', token, { httpOnly: true, maxAge });
+    res.status(200).json({ message: 'Successfully logged in.' });
+  } catch (err) {
     console.log(err);
-    const errors = signInErrors(err);
-    res.status(200).json({ errors });
+    res.status(401).json({ errors: [{ message: 'Invalid credentials.' }] });
   }
-}
+};
+
 
 module.exports.logout = async (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });

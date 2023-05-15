@@ -36,7 +36,7 @@ function RegisterPage() {
   }
 
   if (redirect) {
-    return <Navigate to="/profile" />;
+    return <Navigate to="/login" />;
   }
 
   return (

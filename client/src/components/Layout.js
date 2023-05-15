@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Layout() {
   const { userInfo } = useContext(UserContext);
@@ -31,9 +32,7 @@ function Layout() {
     }
   };
 
-  useEffect(() => {
-    setIsLoggedIn(Boolean(userInfo));
-  }, [userInfo]);
+ 
 
   return (
     <div>
@@ -46,7 +45,7 @@ function Layout() {
           {isLoggedIn ? (
             <>
               <li>
-                <Link to="/profile">Profil</Link>
+                <Link to="/users">Profil</Link>
               </li>
               <li>
                 <button onClick={handleLogout}>Déconnexion</button>

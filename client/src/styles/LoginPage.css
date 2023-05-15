@@ -3,6 +3,16 @@ form{
   margin: 0 auto;
 }
 
+.error-message {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  font-family: 'Crimson Text';
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  text-align: center; 
+}
+
 input {
   display: block;
   margin-bottom: 5px;
