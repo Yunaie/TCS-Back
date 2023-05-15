@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/ArticlePage.css"
+import ChargemementPage from "./ChargementPage"
 
 function ArticlePage() {
   const { id } = useParams(); // Récupère l'ID de l'article depuis l'URL
@@ -20,7 +21,9 @@ function ArticlePage() {
   }, [id]);
 
   if (!article) {
-    return <div>Loading...</div>; // Afficher un message de chargement pendant la récupération des données
+    return <div>
+      <ChargemementPage/>
+    </div>; // Afficher un message de chargement pendant la récupération des données
   }
 
   const formatDate = (createdAt) => {

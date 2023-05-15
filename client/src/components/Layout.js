@@ -2,37 +2,23 @@ import '../styles/Layout.css'
 import skull from '../assets/bg3.gif'
 import { Link, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { UserContext } from "./UserContext";
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 
-function Layout() {
-  const { userInfo } = useContext(UserContext);
-  const navigate = useNavigate();
+function Layout({isLoggedIn,setIsLoggedIn}) {
   const title_header = "True Crime Story";
-  const [isLoggedIn, setIsLoggedIn] = useState(Boolean(userInfo));
+  const navigate = useNavigate();
 
-  const handleLogout = async () => {
+
+  const handleLogout = async (ev) => {
     try {
-      const response = await fetch("http://localhost:8000/users/logout", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        // Déconnexion réussie, redirigez l'utilisateur vers la page de connexion
-        setIsLoggedIn(false);
-        navigate("/login");
-      } else {
-        // Gérer l'erreur de déconnexion
-        throw new Error("Failed to logout");
-      }
+      // Effectuer les actions de déconnexion, tels que la suppression du cookie, etc.
+  
+      setIsLoggedIn(false);
+      navigate("/login"); // Effectuer la redirection vers la page d'accueil ("/")
     } catch (error) {
-      console.log(error);
+      console.error("Error during logout:", error);
     }
   };
-
- 
 
   return (
     <div>
@@ -42,7 +28,7 @@ function Layout() {
         </div>
         <ul className="side-bar">
           <li><Link to="/">Accueil</Link></li>
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <li>
                 <Link to="/users">Profil</Link>
@@ -51,7 +37,8 @@ function Layout() {
                 <button onClick={handleLogout}>Déconnexion</button>
               </li>
             </>
-          ) : (
+          )}
+          {!isLoggedIn && (
             <li>
               <Link to="/login">Connexion</Link>
             </li>

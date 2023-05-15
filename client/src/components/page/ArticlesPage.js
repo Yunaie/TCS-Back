@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../../styles/IndexPage.css';
+import ChargemementPage from "./ChargementPage"
+
 
 function ArticlesPage() {
   const [articles, setArticles] = useState([]);
@@ -25,6 +27,12 @@ function ArticlesPage() {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+
+   if (!articles) {
+    return <div>
+      <ChargemementPage/>
+    </div>; // Afficher un message de chargement pendant la récupération des données
+  }
 
 
   return (
