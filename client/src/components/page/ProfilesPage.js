@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../../styles/ProfilePage.css';
 
-function ArticlesPage() {
+function ArticlesPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 const UserModel = require('../models/users');
 const jwt = require('jsonwebtoken');
 const { signUpErrors, signInErrors } = require('../utils/error');
+const getUserByEmail = require('./user');
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 

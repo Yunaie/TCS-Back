@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../../styles/IndexPage.css';
 
-function IndexPage() {
+function IndexPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {

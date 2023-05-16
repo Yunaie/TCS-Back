@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import "../../styles/LoginPage.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function LoginPage({ isLoggedIn,setIsLoggedIn }) {
+function LoginPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -32,6 +32,17 @@ function LoginPage({ isLoggedIn,setIsLoggedIn }) {
       } else {
         setIsLoggedIn(true); // Mettre à jour l'état global de connexion
         setRedirect(true); // Définir la redirection
+        
+        const response2 = await axios.get(
+          `http://localhost:8000/users/mail/${email}`,
+          {
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        setUserId(response2.data._id);
+        console.log(response2)
       }
     } catch (error) {
       console.error("Error:", error);
@@ -59,7 +70,7 @@ function LoginPage({ isLoggedIn,setIsLoggedIn }) {
         onChange={(ev) => setPassword(ev.target.value)}
       />
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <button className="my-button">Connexion</button>
+      <button className="my-button" type="submit">Connexion</button>
       <Link to="/register">
         <button className="my-button">Pas de compte ?</button>
       </Link>

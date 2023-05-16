@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/ProfilePage.css";
 
-function ProfilePage() {
+function ProfilePage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   const { id } = useParams(); // Récupère l'ID de l'utilisateur depuis l'URL
   const [user, setUser] = useState(null);
 

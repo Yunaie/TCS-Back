@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import "../../styles/ArticlePage.css"
 import ChargemementPage from "./ChargementPage"
 
-function ArticlePage() {
+function ArticlePage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   const { id } = useParams(); // Récupère l'ID de l'article depuis l'URL
   const [article, setArticle] = useState(null);
 
@@ -26,6 +26,10 @@ function ArticlePage() {
     </div>; // Afficher un message de chargement pendant la récupération des données
   }
 
+  function handleLike () {
+    
+  }
+
   const formatDate = (createdAt) => {
     const date = new Date(createdAt);
     const day = date.getDate();
@@ -42,6 +46,7 @@ function ArticlePage() {
       <p className="article-description">{article.description}</p>
       <p className="date">Published on: {formatDate(article.createdAt)}</p>
       <p className="markdown">{article.markdown}</p>
+      <button onClick={handleLike} className="like" type="submit"></button>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "../../styles/InfoPage.css";
 import gitLogo from "../../assets/logo_git.png";
 import LinkedInLogo from "../../assets/logo_linkedin.png";
 
-function InfoPage() {
+function InfoPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
   return (
     <div className="info">
       <p className="info-text">Un site fait par Sirine Yakhou</p>
