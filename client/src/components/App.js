@@ -7,7 +7,6 @@ import ArticlePage from './page/ArticlePage';
 import InfoPage from './page/InfoPage';
 import ProfilePage from './page/ProfilePage';
 import ProfilesPage from './page/ProfilesPage';
-import PagePerso from "./page/PagePerso";
 import '../styles/Reset.css';
 import IndexPage from './page/IndexPage';
 import Layout from './Layout';
@@ -42,10 +41,6 @@ function App() {
               />
             }
           />
-          <Route path="/profile" element={<PagePerso  isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              userId={userId}
-              setUserId={setUserId} />} />
           <Route path="/register" element={<RegisterPage  isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
               userId={userId}

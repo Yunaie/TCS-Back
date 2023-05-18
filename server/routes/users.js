@@ -9,6 +9,11 @@ router.post('/login', authController.signIn);
 // user display: 'block',
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);
+router.put('/like/:id', userController.LikeAnArticle);
+router.put('/unlike/:id', userController.UnikeAnArticle);
+
+router.get('/like/:id',userController.getUserLike);
+
 router.get('/mail/:email', userController.getUserByEmail);
 router.put("/:id", userController.updateUser);
 router.delete('/:id', userController.deleteUser);

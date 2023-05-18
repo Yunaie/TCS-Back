@@ -82,8 +82,6 @@ async function getArticleById(req, res) {
   }
 }
 
-
-
 module.exports = {
   createArticle,
   getArticles,

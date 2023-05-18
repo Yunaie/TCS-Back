@@ -82,3 +82,70 @@ exports.getUserByEmail = async (req, res) => {
   }
 };
 
+
+
+
+module.exports.LikeAnArticle = async (req, res) => {
+  const { id } = req.params;
+  const { articleId } = req.body;
+
+  try {
+    await UserModel.findByIdAndUpdate(
+      id,
+      { $addToSet: { likes: articleId } },
+      { new: true, upsert: true }
+    );
+
+    res.status(200).json({ message: 'L\'article a été aimé avec succès !' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+
+module.exports.UnikeAnArticle = async (req, res) => {
+  const { id } = req.params;
+  const { articleId } = req.body;
+
+  try {
+    await UserModel.findByIdAndUpdate(
+      id,
+      { $pull: { likes: articleId } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: 'L\'article a été désaimé avec succès !' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+
+
+
+
+
+
+module.exports.getUserLike = async (req,res) => {
+  const { id } = req.params;
+
+ 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid user ID' });
+  }
+
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user.likes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la récupération des informations de l\'utilisateur.' });
+  }
+};
+
+
+
+
