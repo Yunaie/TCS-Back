@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate} from "react-router-dom";
 import "../../styles/ArticlePage.css";
 import ChargementPage from "./ChargementPage";
 import axios from 'axios';
+
 
 function ArticlePage({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [articleLiked, setArticleLiked] = useState(false);
-  const [commentaires,SetCommentaires] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:8000/articles/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        setArticle(data);
-      })
-      .catch(error => {
+    const fetchArticle = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/articles/${id}`);
+        setArticle(response.data);
+      } catch (error) {
         console.error('Error:', error);
-      });
+      }
+    };
+
+    fetchArticle();
   }, [id]);
 
   useEffect(() => {
@@ -36,15 +38,6 @@ function ArticlePage({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
 
     fetchLikedArticles();
   }, [userId, id]);
-
-  if (!article) {
-    return (
-      <div>
-        <ChargementPage/>
-      </div>
-    );
-  }
-
 
   const handleLike = async () => {
     try {
@@ -74,6 +67,76 @@ function ArticlePage({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
     }
   };
 
+  const formatDate = (createdAt) => {
+    const date = new Date(createdAt);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  if (!article) {
+    return (
+      <div>
+        <ChargementPage />
+      </div>
+    );
+  }
+  console.log(userId)
+  return (
+    <div className="container2">
+      <img className="article-img" src={article.picture} alt={article.titre} />
+      <h2 className="article-title">{article.titre}</h2>
+      <p className="article-description">{article.description}</p>
+      <p className="date">Published on: {formatDate(article.createdAt)}</p>
+      <p className="markdown">{article.markdown}</p>
+      {isLoggedIn && (
+        articleLiked ? (
+          <button className="like-button" onClick={handleUnlike}>
+            Unlike
+          </button>
+        ) : (
+          <button className="like-button" onClick={handleLike}>
+            Like
+          </button>
+        )
+      )}
+      <div>
+        <CommentPag id={article._id} userId={userId}/>
+      </div>
+    </div>
+  );
+}
+
+function CommentPag({ id,userId }) {
+  const [comments, setComments] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
+  const [comment, setComment] = useState("");
+  const [username,setUsername] = useState()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCommentaires = async () => {
+      try {
+        const response = await axios.post(`http://localhost:8000/commentaires/article`, {
+          article: id
+        });
+        console.log(response.data);
+
+        if (response.data.errors) {
+          // Handle errors appropriately
+        } else {
+          setComments(response.data);
+          const userIds = response.data.map(comment => comment.user);
+          fetchUserDetails(userIds);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchCommentaires();
+  }, [id]);
 
   const formatDate = (createdAt) => {
     const date = new Date(createdAt);
@@ -83,55 +146,91 @@ function ArticlePage({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
     return `${day}/${month}/${year}`;
   };
 
+  const fetchUserDetails = async (userIds) => {
+    try {
+      const requests = userIds.map(userId => axios.get(`http://localhost:8000/users/${userId}`));
+      const responses = await Promise.all(requests);
+
+      const users = responses.map(response => {
+        if (response.data.errors) {
+          // Handle errors appropriately
+        } else {
+          return response.data;
+        }
+      });
+
+      setUserDetails(users);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Récupérer les détails de l'utilisateur depuis l'API en utilisant l'ID
+    fetch(`http://localhost:8000/users/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Mettre à jour le state avec les détails de l'utilisateur récupéré
+        setUsername(data.username);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [id]);
+
+
+  const handleComment = async (ev) => {
+    ev.preventDefault();
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/commentaires`,
+        {
+          user: userId,
+          commentaire: comment,
+          article: id
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      const newComment = response.data;
+      setComments([...comments, newComment]); // Ajoute le nouveau commentaire à la liste existante
+      setComment(""); // Réinitialise le champ de commentaire
+  
+      console.log(response.data);
+      navigate(`/articles/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
   return (
-    <div className="container2">
-      <img className="article-img" src={article.picture} alt={article.titre} />
-      <h2 className="article-title">{article.titre}</h2>
-      <p className="article-description">{article.description}</p>
-      <p className="date">Published on: {formatDate(article.createdAt)}</p>
-      <p className="markdown">{article.markdown}</p>
-      {
-  isLoggedIn ? (
-    articleLiked ? (
-      <button className="unlike" onClick={handleUnlike}>
-        <svg
-          viewBox="0 0 17.503 15.625"
-          height="20.625"
-          width="20.503"
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon"
-        >
-          <path
-            transform="translate(0 0)"
-            d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z"
-            id="Fill"
-          ></path>
-        </svg>
-      </button>
-    ) : (
-      <button className="like" onClick={handleLike}>
-        <svg
-          viewBox="0 0 17.503 15.625"
-          height="20.625"
-          width="20.503"
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon"
-        >
-          <path
-            transform="translate(0 0)"
-            d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z"
-            id="Fill"
-          ></path>
-        </svg>
-      </button>
-    )
-  ) : (
-    null
-  )
-}
- 
+    <div className="comments">
+      <form className="write-comment">
+          <h2 className="comment-user">{username}</h2>
+          <input
+                  type="text"
+                  placeholder="Ecrire un commentaire"
+                  value={comment}
+                  onChange={(ev) => setComment(ev.target.value)}
+                />
+          <button className="my-button" type="submit" onClick={handleComment}>
+                  Publier
+          </button>
+      </form>
+      {comments.map((comment, index) => (
+        <div key={comment._id}>
+          <h2 className="comment-user">{userDetails[index]?.username}</h2>
+          <div className="comment-content">
+          <img className="comment-pic" src={userDetails[index]?.picture} alt="User" />
+          <p className="comment-date">Published on: {formatDate(comment.createdAt)}</p>
+          <p className="comment-text">{comment.commentaire}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-export default ArticlePage
+export default ArticlePage;

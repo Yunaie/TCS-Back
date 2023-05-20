@@ -1,4 +1,4 @@
-.header{
+header{
     text-align: center;
     display: flex;
     justify-content: center;
@@ -7,7 +7,6 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 30px;
     border-radius: 5px;
-    width: 80%;
     /* Utilise une largeur en pourcentage pour que la boîte modale soit responsive */
     max-width: 800px;
     /* Utilise une largeur maximale pour éviter que la boîte modale ne devienne trop grande */
@@ -28,7 +27,7 @@
 }
   
 
-.header .side-bar {
+header .side-bar {
     list-style: none; 
     padding: 10px; 
     display: flex; 
@@ -37,13 +36,13 @@
     color: rgb(255, 255, 255,0.8);
 }
 
-.header .side-bar li {
+header .side-bar li {
     margin-right: 40px;
     margin-left: 40px;
     font-size: 16px;
 }
   
-.header .side-bar li:hover {
+header .side-bar li:hover {
     cursor : pointer;
     color : rgba(175, 2, 2, 0.806);
     transition: color 0.2s;
@@ -69,7 +68,7 @@ body::before {
   
  
   
-  .modal-content {
+  .content {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 30px;
     border-radius: 5px;
@@ -84,9 +83,9 @@ body::before {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
+    align-items: center;
   }
-  
+
   
   
 .image-skull {
@@ -96,5 +95,4 @@ body::before {
     transform: translate(-50%, -50%);
     z-index: 9999;
   }
-
 

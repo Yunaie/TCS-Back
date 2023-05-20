@@ -7,8 +7,8 @@ const { createCommentaire,getCommentairesByArticle,getCommentairesByUser,getComm
 
 router.post('/', createCommentaire);
 router.get('/', getCommentaires);
-router.get('/article',getCommentairesByArticle)
-router.get('/user',getCommentairesByUser)
+router.post('/article',getCommentairesByArticle)
+router.post('/user',getCommentairesByUser)
 router.delete('/:id',deleteCommentaire)
 
 

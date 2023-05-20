@@ -49,10 +49,10 @@ const getCommentaires = async (req, res) => {
 };
 
 const getCommentairesByArticle = async (req, res) => {
-  const { articleId } = req.body; // Assurez-vous que l'ID de l'article est passé dans le corps de la requête
+  const { article } = req.body; // Assurez-vous que l'ID de l'article est passé dans le corps de la requête
 
   try {
-    const commentaires = await Commentaire.find({ article: articleId }).exec();
+    const commentaires = await Commentaire.find({ article: article }).exec();
     if (commentaires.length === 0) {
       return res.status(404).json({ message: "Aucun commentaire trouvé pour cet article" });
     }
@@ -64,10 +64,10 @@ const getCommentairesByArticle = async (req, res) => {
 };
 
 const getCommentairesByUser = async (req, res) => {
-  const { UserId } = req.body; // Assurez-vous que l'ID de l'article est passé dans le corps de la requête
+  const { user } = req.body; // Assurez-vous que l'ID de l'article est passé dans le corps de la requête
 
   try {
-    const commentaires = await Commentaire.find({ user: UserId }).exec();
+    const commentaires = await Commentaire.find({ user: user }).exec();
     if (commentaires.length === 0) {
       return res.status(404).json({ message: "Aucun commentaire trouvé pour cet user" });
     }
