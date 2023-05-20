@@ -7,7 +7,7 @@ function ArticlesPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
 
   useEffect(() => {
     // Récupérer tous les articles depuis l'API
-    fetch('http://localhost:8000/users/')
+    fetch('http://localhost:8000/users')
       .then(response => response.json())
       .then(data => {
         // Mettre à jour le state avec les articles récupérés

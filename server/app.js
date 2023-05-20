@@ -18,6 +18,7 @@ const articleRouter = require('./routes/article')
 const criminelRouter = require('./routes/criminel')
 const victimeRouter = require('./routes/victime')
 const crimeRouter = require('./routes/crime')
+const commentaireRouter = require('./routes/commentaire')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -46,6 +47,7 @@ app.use('/articles',articleRouter);
 app.use('/criminels',criminelRouter);
 app.use('/victimes',victimeRouter);
 app.use('/crimes',crimeRouter);
+app.use('/commentaires',commentaireRouter);
 
 
 app.listen(process.env.PORT || 8000);

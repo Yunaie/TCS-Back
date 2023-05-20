@@ -49,6 +49,9 @@ function Layout({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
           <li>
             <Link to="/infos">Infos</Link>
           </li>
+          <li>
+            <Link to = "/users">Users</Link>
+          </li>
         </ul>
       </div>
       <div className="body">

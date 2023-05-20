@@ -38,8 +38,8 @@
   text-align: justify;
 }
 
-
 .like {
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,9 +49,12 @@
   border: none;
   background-color: transparent;
   position: relative;
+  cursor : pointer;
 }
 
 .like::after {
+  cursor : pointer;
+  content: 'like';
   width: fit-content;
   height: fit-content;
   position: absolute;
@@ -103,6 +106,7 @@
 }
 
 .unlike::after {
+  content: 'dislike';
   width: fit-content;
   height: fit-content;
   position: absolute;

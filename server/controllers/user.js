@@ -12,28 +12,50 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
-module.exports.updateUser = async (req, res) => {
+module.exports.updateBio = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await UserModel.findOneAndUpdate(
+    const updatedUser = await UserModel.findOneAndUpdate(
       { _id: req.params.id },
       {
         $set: {
           bio: req.body.bio,
         },
       },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        if (err) return res.status(500).send({ message: err });
-      }
+      { new: true, upsert: true, setDefaultsOnInsert: true }
     );
+    res.status(200).json(updatedUser.bio);
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json(err);
   }
 };
+
+
+module.exports.updatePicture = async (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  try {
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          picture: req.body.picture,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+    res.status(200).json(updatedUser.picture);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+
+
+
 
 module.exports.deleteUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
@@ -83,8 +105,6 @@ exports.getUserByEmail = async (req, res) => {
 };
 
 
-
-
 module.exports.LikeAnArticle = async (req, res) => {
   const { id } = req.params;
   const { articleId } = req.body;
@@ -119,12 +139,6 @@ module.exports.UnikeAnArticle = async (req, res) => {
     res.status(500).json(err);
   }
 };
-
-
-
-
-
-
 
 module.exports.getUserLike = async (req,res) => {
   const { id } = req.params;
