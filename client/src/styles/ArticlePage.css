@@ -39,111 +39,6 @@
   text-align: justify;
 }
 
-.like {
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  background-color: transparent;
-  position: relative;
-  cursor : pointer;
-}
-
-.like::after {
-  cursor : pointer;
-  content: 'like';
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.747);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  opacity: 0;
-  visibility: hidden;
-  transition: .2s linear;
-  top: 115%;
-}
-
-.icon {
-  width: 30px;
-  height: 30px;
-  transition: .2s linear;
-}
-
-.icon path {
-  fill: white;
-  transition: .2s linear;
-}
-
-.like:hover > .icon {
-  transform: scale(1.2);
-}
-
-.like:hover > .icon path {
-  fill:rgba(175, 2, 2, 0.806);
-}
-
-.like:hover::after {
-  visibility: visible;
-  opacity: 1;
-  top: 105%;
-}
-
-
-.unlike {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  background-color: transparent;
-  position: relative;
-}
-
-.unlike::after {
-  content: 'dislike';
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.747);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  opacity: 0;
-  visibility: hidden;
-  transition: .2s linear;
-  top: 115%;
-}
-
-.icon {
-  width: 30px;
-  height: 30px;
-  transition: .2s linear;
-}
-
-.icon path {
-  fill: white;
-  transition: .2s linear;
-}
-
-.unlike:hover > .icon {
-  transform: scale(1.2);
-}
-
-.unlike:hover > .icon path {
-  fill:rgba(175, 2, 2, 0.806);
-}
-
-.unlike:hover::after {
-  visibility: visible;
-  opacity: 1;
-  top: 105%;
-}
 .comments {
   margin-top: 40px;
   max-width: 650px;
@@ -182,3 +77,104 @@
 .comment-text {
   margin-top: 40px;
 }
+
+ .tooltip {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.tooltip:hover {
+  width: 50px;
+  border-radius: 50px;
+  transition-duration: .2s;
+  background-color : rgba(175, 2, 2, 0.806);
+  align-items: center;
+}
+
+.btn {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.btn:hover > .icon {
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: .2s linear;
+}
+
+.btn:focus > .icon {
+  fill: #fd1853;
+  animation: grosseur .2s linear;
+}
+
+@keyframes grosseur {
+  0% {
+    width: 50px;
+    height: 50px;
+    fill: #fd1853;
+  }
+  100% {
+    width: 30px;
+    height: 30px;
+    fill: #fd1853;
+  }
+}
+
+.btn-like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  color: white;
+}
+
+.btn-like:hover > .icon {
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: .2s linear;
+}
+
+.btn-like:focus > .icon {
+  fill: white;
+  animation: grosseur .2s linear;
+}
+
+.icon {
+  fill: white; /* Couleur du cœur non liké */
+}
+
+
+.btn-like.filled .icon path {
+  fill: red;
+}
+
