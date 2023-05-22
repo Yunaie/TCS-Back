@@ -2,7 +2,7 @@ import {useState } from "react";
 import { Navigate } from "react-router-dom";
 import "../../styles/LoginPage.css";
 
-function RegisterPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
+function RegisterPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId,isAdmin,setisAdmin }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -4,7 +4,7 @@ import {Outlet} from 'react-router-dom';
 import '../styles/Layout.css';
 import skull from '../assets/bg3.gif';
 
-function Layout({isLoggedIn, setIsLoggedIn, userId, setUserId}) {
+function Layout({isLoggedIn, setIsLoggedIn, userId, setUserId,isAdmin,setisAdmin}) {
     const title_header = "True Crime Story";
     const navigate = useNavigate();
 
@@ -56,9 +56,18 @@ function Layout({isLoggedIn, setIsLoggedIn, userId, setUserId}) {
                         <li>
                             <Link to="/infos">Infos</Link>
                         </li>
-                        <li>
+                        {
+                        isAdmin && (
+                            <>
+                               <li>
                             <Link to="/users">Users</Link>
-                        </li>
+                                </li>
+                                <li>
+                                <Link to="/comments">Comments</Link>
+                                </li>
+                            </>
+                        )
+                    }
                     </ul>
                 </nav>
             </header>

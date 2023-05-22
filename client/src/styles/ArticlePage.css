@@ -40,7 +40,7 @@
 }
 
 .comments {
-  margin-top: 40px;
+  margin-top: 165px;
   max-width: 650px;
   margin: 0 auto; /* Ajouter cette ligne pour centrer horizontalement */
   text-align: center;
@@ -50,10 +50,10 @@
   font-size: 20px;
   font-family: 'Special Elite';
   font-weight: 600;
-  margin-top: 10px;
+  margin-left: 20px;
   text-align: left;
   margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 100px;
   
 }
 
@@ -176,5 +176,10 @@
 
 .btn-like.filled .icon path {
   fill: red;
+}
+
+.like {
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 

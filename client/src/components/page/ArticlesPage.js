@@ -4,7 +4,7 @@ import '../../styles/IndexPage.css';
 import ChargemementPage from "./ChargementPage"
 
 
-function ArticlesPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId }) {
+function ArticlesPage({ IsLoggedIn,setIsLoggedIn,userId, setUserId,isAdmin,setisAdmin }) {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {

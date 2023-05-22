@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../../styles/ProfilePage.css";
 import "../../styles/IndexPage.css";
 
-function ProfilePage({ isLoggedIn, setIsLoggedIn, userId, setUserId }) {
+function ProfilePage({ isLoggedIn, setIsLoggedIn, userId, setUserId,isAdmin,setisAdmin }) {
   const [user, setUser] = useState(null);
   const [likes, setLikes] = useState([]);
   const [amIOwner, setAmIOwner] = useState(false);

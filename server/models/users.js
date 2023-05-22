@@ -40,7 +40,9 @@ const userSchema = new mongoose.Schema(
     type : Schema.Types.ObjectId,
     ref : 'Article'
   }],
-  
+  Admin : {
+    type : Boolean
+  }
   },
   {
     timestamps: true,

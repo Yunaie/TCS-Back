@@ -5,7 +5,7 @@ import ChargementPage from "./ChargementPage";
 import axios from 'axios';
 
 
-function ArticlePage({isLoggedIn, setIsLoggedIn, userId, setUserId}) {
+function ArticlePage({isLoggedIn, setIsLoggedIn, userId, setUserId,isAdmin,setisAdmin}) {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
     const [articleLiked, setArticleLiked] = useState(false);
@@ -103,7 +103,7 @@ function ArticlePage({isLoggedIn, setIsLoggedIn, userId, setUserId}) {
                 {
                 article.markdown
             }</p>
-            {
+            <div className="like">{
             isLoggedIn && (
                 <button className={
                         articleLiked ? "btn-like filled" : "btn-like"
@@ -116,9 +116,7 @@ function ArticlePage({isLoggedIn, setIsLoggedIn, userId, setUserId}) {
                     </svg>
                      </button>
             )
-        }
-
-
+        }</div>
             <div>
                 <CommentPag id={
                         article._id
@@ -220,7 +218,7 @@ function CommentPag({id, userId, isLoggedIn}) {
             const updatedComments = [...comments];
             updatedComments.splice(index, 1);
             setComments(updatedComments);
-            navigate(`/articles/${id}`);
+            //navigate(`/articles/${id}`);
         } catch (error) {
             console.log(error);
         }
