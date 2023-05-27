@@ -22,7 +22,7 @@ const verifyJWT = (req, res, next) => {
 
   try {
     // Vérifier la validité du jeton en utilisant la clé secrète
-    const decoded = jwt.verify(token, 'YOUR_SECRET_KEY');
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 
     // Ajouter les données du jeton décodé à la requête
     req.user = decoded;
@@ -61,7 +61,8 @@ module.exports.signIn = async (req, res) => {
   try {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge });
+    res.cookie('jwt', token, {
+      httpOnly: true, maxAge });
     res.status(200).json({ message: 'Successfully logged in.' });
   } catch (err) {
     console.log(err);
