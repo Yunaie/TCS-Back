@@ -5,9 +5,7 @@ const userController = require('../controllers/user');
 // auth
 router.post("/register", authController.signUp);
 router.post('/login', authController.signIn);
-const {verifyJWT} = require('../controllers/auth')
 
-router.use(verifyJWT);
 // user 
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);

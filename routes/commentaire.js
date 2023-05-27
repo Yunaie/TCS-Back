@@ -5,9 +5,6 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 const { createCommentaire,getCommentairesByArticle,getCommentairesByUser,getCommentaires,deleteCommentaire } = require('../controllers/commentaire');
-const {verifyJWT} = require('../controllers/auth')
-
-router.use(verifyJWT);
 
 router.post('/', createCommentaire);
 router.get('/', getCommentaires);

@@ -4,9 +4,7 @@ const crime = require('../models/crime');
 
 const router = express.Router();
 const { createCrime, getCrimes, deleteCrimes } = require('../controllers/crime');
-const {verifyJWT} = require('../controllers/auth')
 
-router.use(verifyJWT);
 router.post('/', createCrime);
 router.get('/', getCrimes);
 router.delete('/:id',deleteCrimes);
