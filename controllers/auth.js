@@ -6,9 +6,19 @@ const getUserByEmail = require('./user');
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 const createToken = (id) => {
-  return jwt.sign({id}, process.env.TOKEN_SECRET, {
+  return jwt.sign({ id }, process.env.TOKEN_SECRET, {
     expiresIn: maxAge
-  })
+  });
+};
+
+const verifyJWT = (token, secretKey) => {
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    return decoded; // Le JWT est valide, renvoie les informations décryptées
+  } catch (error) {
+    // Le JWT est invalide ou a expiré, gérer l'erreur ici
+    throw new Error('Invalid or expired token');
+  }
 };
 
 module.exports.signUp = async (req, res) => {
@@ -19,17 +29,15 @@ module.exports.signUp = async (req, res) => {
       username,
       email,
       password,
-      Admin: Admin === "true" ? true : false
+      Admin: Admin === 'true' ? true : false
     });
-    res.status(201).json({ message: "Successfully registered." });
-
+    res.status(201).json({ message: 'Successfully registered.' });
   } catch (err) {
     console.log(err);
     const errors = signUpErrors(err);
     res.status(200).send({ errors });
   }
 };
-
 
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
@@ -45,5 +53,4 @@ module.exports.signIn = async (req, res) => {
   }
 };
 
-
-
+module.exports.verifyJWT = verifyJWT;

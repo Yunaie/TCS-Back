@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 var cors = require("cors");
 require('dotenv').config()
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://true-crime-story.onrender.com',
   credentials: true
 }));
 app.use(bodyparser.json());

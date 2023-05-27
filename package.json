@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "build" : "",
+=======
+   "build" : "",
+>>>>>>> e296a048ff9babbac764843a114a680abe9d9377
     "devStart": "nodemon app.js"
   },
   "author": "",
