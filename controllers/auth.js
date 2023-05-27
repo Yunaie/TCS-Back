@@ -11,6 +11,31 @@ const createToken = (id) => {
   });
 };
 
+const verifyJWT = (req, res, next) => {
+  // Récupérer le jeton d'authentification du header, du cookie ou du corps de la requête
+  const token = req.headers.authorization || req.cookies.token || req.body.token;
+
+  // Vérifier si le jeton existe
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  try {
+    // Vérifier la validité du jeton en utilisant la clé secrète
+    const decoded = jwt.verify(token, 'YOUR_SECRET_KEY');
+
+    // Ajouter les données du jeton décodé à la requête
+    req.user = decoded;
+
+    // Passer à la prochaine fonction middleware
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid or expired token' });
+  }
+};
+
+module.exports = verifyJWT;
+
 
 module.exports.signUp = async (req, res) => {
   const { username, email, password, Admin } = req.body;
@@ -43,4 +68,6 @@ module.exports.signIn = async (req, res) => {
     res.status(401).json({ errors: [{ message: 'Invalid credentials.' }] });
   }
 };
+
+
 

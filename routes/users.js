@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const authController = require('../controllers/auth');
 const userController = require('../controllers/user');
-
+const verifyJWT = require('../controllers/auth')
 // auth
 router.post("/register", authController.signUp);
-router.post('/login', authController.signIn);
+router.post('/login', verifyJWT,authController.signIn);
 
 // user 
 router.get('/', userController.getAllUsers);
