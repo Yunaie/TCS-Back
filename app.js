@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const {checkUser, requireAuth} = require('./middleware/auth');
 const cors = require("cors");
 require('dotenv').config()
 app.use(cors({
@@ -12,6 +13,16 @@ app.use(cors({
 app.use(bodyparser.json());
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(bodyparser.urlencoded({extended: true}));
+app.use(cookieParser());
+
+// jwt
+app.get('*', checkUser);
+app.get('/jwtid', requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user._id)
+});
+
 
 const usersRouter = require('./routes/users')
 const articleRouter = require('./routes/article')
@@ -27,7 +38,7 @@ app.use(express.json());
 // connect to db
 try {
     mongoose.connect(
-        "mongodb+srv://sirine:sirine42@cluster0.ngthady.mongodb.net/test",
+        `${process.env.MONGO_PASS}/test`,
         { useNewUrlParser: true }
       );
       mongoose.connection.on("connected", () => {
