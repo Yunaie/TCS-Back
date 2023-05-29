@@ -39,13 +39,3 @@ module.exports.requireAuth = (req, res, next) => {
   }
 };
 
-module.exports.adminMiddleware = (req, res, next) => {
-  // Vérifier si l'utilisateur est un administrateur
-  if (req.user && req.user.isAdmin) {
-    // L'utilisateur est un administrateur, passer au middleware suivant
-    next();
-  } else {
-    // L'utilisateur n'est pas un administrateur, renvoyer une réponse d'erreur
-    res.status(403).json({ error: 'Accès refusé. Vous devez être administrateur.' });
-  }
-};
