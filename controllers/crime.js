@@ -7,10 +7,12 @@ const createCrime = async (req, res) => {
 
   try {
     // Vérifier si les criminel et victime existent
-    const existingCriminels = await Criminel.findById(criminel);
-    const existingVictimes = await Victime.findById(victime);
-    if (existingCriminels.length !== criminel.length || existingVictimes.length !== victime.length) {
-      return res.status(404).json({ message: "L'un ou plusieurs des criminels ou des victimes spécifiés n'existent pas" });
+    const existingCriminel = await Criminel.findById(criminel);
+    const existingVictime = await Victime.findById(victime);
+    if (!existingCriminel) {
+      return res.status(404).json({ message: "Le criminel spécifié n'existe pas" });
+    }if (!existingVictime) {
+      return res.status(404).json({ message: "La victime spécifié n'existe pas" });
     }
 
     // Créer le nouveau crime
