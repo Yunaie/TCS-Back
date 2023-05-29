@@ -34,8 +34,26 @@ async function deleteVictim(req, res) {
     }
 }
 
+async function getVictimeById(req, res) {
+    const { id } = req.params;
+  
+    try {
+      const victim = await Victim.findById(id);
+  
+      if (!victim) {
+        return res.status(404).json({ message: 'Article not found' });
+      }
+  
+      res.json(victim);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
 module.exports = {
     createVictim,
     getVictim,
-    deleteVictim
+    deleteVictim,
+    getVictimeById
 };

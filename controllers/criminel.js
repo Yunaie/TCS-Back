@@ -34,8 +34,26 @@ async function deleteCriminals(req,res) {
     }
 }
 
+async function getCriminelById(req, res) {
+    const { id } = req.params;
+  
+    try {
+      const criminal = await criminel.findById(id);
+  
+      if (!criminal) {
+        return res.status(404).json({ message: 'Article not found' });
+      }
+  
+      res.json(criminal);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
 module.exports = {
   createCriminel,
   getCriminals,
-  deleteCriminals
+  deleteCriminals,
+  getCriminelById
 };
