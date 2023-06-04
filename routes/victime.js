@@ -4,10 +4,12 @@ const victime = require('../models/victime');
 
 const router = express.Router();
 const { createVictim, getVictim,deleteVictim,getVictimeById } = require('../controllers/victime');
+const {checkUser, requireAdmin} = require('./middleware/auth');
 
-router.post('/', createVictim);
+
+router.post('/',checkUser, requireAdmin, createVictim);
 router.get('/', getVictim);
-router.delete('/:id',deleteVictim);
+router.delete('/:id',checkUser, requireAdmin,deleteVictim);
 router.get('/:id',getVictimeById);
 
 module.exports = router;

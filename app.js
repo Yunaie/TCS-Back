@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const {checkUser, requireAuth} = require('./middleware/auth');
+const {checkUser, requireAdmin} = require('./middleware/auth');
 const cors = require("cors");
 require('dotenv').config()
 app.use(cors({

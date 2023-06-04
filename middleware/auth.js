@@ -21,16 +21,20 @@ module.exports.checkUser = (req, res, next) => {
   }
 };
 
-module.exports.requireAuth = (req, res, next) => {
+module.exports.requireAdmin = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err);
-        res.send(200).json('no token');
+        res.status(200).json('no token');
       } else {
         console.log(decodedToken.id);
-        next();
+        if (decodedToken.admin) {
+          next(); // Passer à la prochaine fonction middleware
+        } else {
+          res.sendStatus(401); // Non autorisé si l'utilisateur n'est pas administrateur
+        }
       }
     });
   } else {
