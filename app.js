@@ -17,11 +17,7 @@ app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(cookieParser());
 
-// jwt
-app.get('*', checkUser);
-app.get('/jwtid', requireAuth, (req, res) => {
-  res.status(200).send(res.locals.user._id)
-});
+
 
 
 const usersRouter = require('./routes/users')
