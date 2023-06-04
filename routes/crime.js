@@ -4,7 +4,7 @@ const crime = require('../models/crime');
 
 const router = express.Router();
 const { createCrime, getCrimes, deleteCrimes,getCrimeById } = require('../controllers/crime');
-const {checkUser, requireAdmin} = require('./middleware/auth');
+const {checkUser, requireAdmin} = require('../middleware/auth');
 
 router.post('/',checkUser,requireAdmin, createCrime);
 router.get('/', getCrimes);
