@@ -37,7 +37,7 @@ module.exports.signIn = async (req, res) => {
       secure: true // Utilisation du protocole HTTPS uniquement
     });
 
-    res.status(200).json({ _id: user._id, Admin: user.Admin });
+    res.status(200).json({ _id: user._id, Admin: user.Admin, token : token});
   } catch (err) {
     const errors = signInErrors(err);
     res.status(400).json({ errors });
