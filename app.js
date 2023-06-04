@@ -7,7 +7,7 @@ const {checkUser, requireAdmin} = require('./middleware/auth');
 const cors = require("cors");
 require('dotenv').config()
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://true-crime-story.onrender.com',
   credentials: true
 }));
 app.use(bodyparser.json());
