@@ -4,7 +4,7 @@ const criminel = require('../models/criminel');
 
 const router = express.Router();
 const { createCriminel, getCriminals,deleteCriminals,getCriminelById } = require('../controllers/criminel');
-const {checkUser, requireAdmin} = require('./middleware/auth');
+const {checkUser, requireAdmin} = require('../middleware/auth');
 
 
 router.post('/',checkUser, requireAdmin, createCriminel);
