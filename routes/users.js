@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const authController = require('../controllers/auth');
 const userController = require('../controllers/user');
-const {checkUser, requireAdmin} = require('../middleware/auth');
 
 // auth
 router.post("/register", authController.signUp);
@@ -16,6 +15,6 @@ router.get('/like/:id', userController.getUserLike);
 router.get('/mail/:email', userController.getUserByEmail);
 router.put("/bio/:id", userController.updateBio);
 router.put("/picture/:id", userController.updatePicture);
-router.delete('/:id',checkUser, requireAdmin, userController.deleteUser);
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
